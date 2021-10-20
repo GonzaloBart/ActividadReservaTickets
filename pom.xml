@@ -17,6 +17,12 @@
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
 			<resource>
+				<directory>src/resources</directory>
+				<includes>
+					<include>log4j.properties</include>
+				</includes>
+			</resource>
+			<resource>
 				<directory>src</directory>
 				<excludes>
 					<exclude>**/*.java</exclude>

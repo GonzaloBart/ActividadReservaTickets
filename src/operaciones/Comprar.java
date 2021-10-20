@@ -1,12 +1,17 @@
 package operaciones;
 
+import java.net.URL;
 import java.util.Scanner;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 public class Comprar {
 
-	
+
 	Scanner sc = new Scanner(System.in);
-	
+
+	static Logger logger = Logger.getLogger(Comprar.class.toString());
 	
 	// Comprar billete con asiento asignado por defecto
 	public void comprarAleatorio(char[][] vagon) {
@@ -21,7 +26,9 @@ public class Comprar {
 			for (int j = 0; j < vagon[i].length; j++) {
 				if (vagon[i][j] == 'L') {
 					fila = i;
-					columna = j;						
+					columna = j;
+					
+					logger.info("Vendido un ticket aleatoio");
 				}
 			}
 		}
@@ -32,7 +39,7 @@ public class Comprar {
 		} else {vagon[fila][columna] = 'C';}
 
 		System.out.println("El vagon:");
-		
+
 		obj.pintar(vagon);
 
 	}
@@ -42,35 +49,47 @@ public class Comprar {
 	public void comprarNominal (char[][] vagon) {
 
 		OpBasicas obj = new OpBasicas();
-		
+
 		int fila; 
 		int columna;
 
 
 		System.out.println("El vagon: ");
 		System.out.println();
-		
+
 		obj.pintar(vagon);
+		try {
 
-		do { // Do-while para volver a introducir nº de asiento en caso de estar reservado
+			do { // Do-while para volver a introducir nº de asiento en caso de estar reservado
 
-			System.out.println("Que fila desea?");
-			fila = sc.nextInt();
-
-
-			System.out.println("Que columna desea?");
-			columna = sc.nextInt(); 
+				System.out.println("Que fila desea?");
+				fila = sc.nextInt();
 
 
-			if (vagon[fila][columna] == 'C') { // comprobar asiento esta libre
-				System.out.println("El asiento esta ocupado! Elige otro");
-			}
+				System.out.println("Que columna desea?");
+				columna = sc.nextInt(); 
 
-			System.out.println();
+
+				if (vagon[fila][columna] == 'C') { // comprobar asiento esta libre
+					System.out.println("El asiento esta ocupado! Elige otro");
+				}
+
+				System.out.println();
+
+			} while (vagon[fila][columna] == 'C');
+
+			vagon[fila][columna] = 'C'; // Cambiar asiento de 'L' Libre a 'C' Comprado
+
+		} catch (Exception e) {
+			// TODO: handle exception logger 
+			//Logger.log.error("Hay un error en la eleccion de fila y columna" + e);
+
+			URL url = getClass().getResource("/log4j.properties");
+						
+			PropertyConfigurator.configure(url);
 			
-		} while (vagon[fila][columna] == 'C');
-
-		vagon[fila][columna] = 'C'; // Cambiar asiento de 'L' Libre a 'C' Comprado
+			logger.error("BOOM!" + e + " " + url);
+		}
 
 		obj.pintar(vagon);
 
