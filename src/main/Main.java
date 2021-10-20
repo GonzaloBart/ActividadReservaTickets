@@ -19,7 +19,7 @@ public class Main {
 
 		comprar.comprarAleatorio(OpBasicas.vagon);
 
-		inicio.limpiar();
+		//inicio.limpiar();
 
 		comprar.comprarAleatorio(OpBasicas.vagon);
 
