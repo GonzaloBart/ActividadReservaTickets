@@ -2,6 +2,8 @@ package operaciones;
 
 import java.util.Scanner;
 
+import main.Main;
+
 public class OpBasicas {
 
 	// Puedo crear mas vagones para el tren
@@ -22,8 +24,12 @@ public class OpBasicas {
 		column = sc.nextInt();
 
 		vagon = new char [fila][column];
+		
+		Main.logger.info("Vagon creado con: " + fila + " filas y " + column + " columnas");
 
 		return vagon;
+		
+
 	}
 
 	// Mostrar el vagon 
@@ -66,6 +72,9 @@ public class OpBasicas {
 		pintar(vagon);
 
 		System.out.println();
+		
+		Main.logger.info("Se ha eliminado el vagon");
+
 	}
 
 	

@@ -1,20 +1,18 @@
 package operaciones;
 
-import java.net.URL;
 import java.util.Scanner;
-
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import main.Main;
 
 public class Comprar {
 
 
 	Scanner sc = new Scanner(System.in);
 
-	static Logger logger = Logger.getLogger(Comprar.class.toString());
 	
 	// Comprar billete con asiento asignado por defecto
 	public void comprarAleatorio(char[][] vagon) {
+		
+		
 
 
 		OpBasicas obj = new OpBasicas();
@@ -28,7 +26,7 @@ public class Comprar {
 					fila = i;
 					columna = j;
 					
-					logger.info("Vendido un ticket aleatoio");
+					Main.logger.info("Vendido un ticket aleatoio");
 				}
 			}
 		}
@@ -81,14 +79,10 @@ public class Comprar {
 			vagon[fila][columna] = 'C'; // Cambiar asiento de 'L' Libre a 'C' Comprado
 
 		} catch (Exception e) {
-			// TODO: handle exception logger 
-			//Logger.log.error("Hay un error en la eleccion de fila y columna" + e);
-
-			URL url = getClass().getResource("/log4j.properties");
-						
-			PropertyConfigurator.configure(url);
+			// TODO: handle exception logger
 			
-			logger.error("BOOM!" + e + " " + url);
+			Main.logger.error("Error al escoger filas y columnas fuera de la matriz del vagon" + e);
+			
 		}
 
 		obj.pintar(vagon);
